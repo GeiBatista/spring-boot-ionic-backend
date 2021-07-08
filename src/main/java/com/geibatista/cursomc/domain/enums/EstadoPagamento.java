@@ -1,14 +1,15 @@
 package com.geibatista.cursomc.domain.enums;
 
-public enum TipoCliente {
+public enum EstadoPagamento {
 
-	PESSOAFISICA(1, "Pessoa Física"), 
-	PESSOAJURIDICA(2, "Pessoa Jurídica");
-
+	PENDENTE(1, "Pendente"),
+	QUITADO(2, "Quitado"),
+	CANCELADO(3, "Cancelado");
+	
 	private int cod;
 	private String descricao;
 
-	private TipoCliente(int cod, String descricao) {
+	private EstadoPagamento(int cod, String descricao) {
 		this.cod = cod;
 		this.descricao = descricao;
 	}
@@ -21,11 +22,11 @@ public enum TipoCliente {
 		return descricao;
 	}
 
-	public static TipoCliente toEnum(Integer id) {
+	public static EstadoPagamento toEnum(Integer id) {
 		if (id == null) {
 			return null;
 		}
-		for (TipoCliente x : TipoCliente.values()) {
+		for (EstadoPagamento x : EstadoPagamento.values()) {
 			if (id.equals(x.getCod())) {
 				return x;
 			}
