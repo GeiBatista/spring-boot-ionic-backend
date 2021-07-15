@@ -2,12 +2,20 @@ package com.geibatista.cursomc.dto;
 
 import java.io.Serializable;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
 import com.geibatista.cursomc.domain.Categoria;
 
 public class CategoriaDTO implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	private Integer id;
+	
+	@NotBlank(message = "Nome não pode ser em branco")
+	@NotNull(message = "Nome não pode ser vazio")
+	@Size(min = 5, max = 80, message = "O tamanho deve ser entre cinco e oitenta caracteres")
 	private String nome;
 	
 	public CategoriaDTO() {
