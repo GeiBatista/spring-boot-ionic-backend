@@ -2,20 +2,42 @@ package com.geibatista.cursomc.dto;
 
 import java.io.Serializable;
 
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
+import com.geibatista.cursomc.services.validation.ClienteInsert;
+
+@ClienteInsert
 public class ClienteNewDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
+	@NotBlank @NotNull(message = "Preenchimento obrigatório")
+	@Size(min = 5, max = 120, message = "O tamanho deve ser entre 5 e 120 caracteres")
 	private String nome;
+	
+	@NotBlank @NotNull(message = "Preenchimento obrigatório")
+	@Email(message = "Email inválido")
 	private String email;
+	
+	@NotBlank @NotNull(message = "Preenchimento obrigatório")
 	private String cpfOuCnpj;
 	private Integer tipo;
 	
+	@NotBlank @NotNull(message = "Nome não pode ser em branco")
+	@NotNull(message = "Preenchimento obrigatório")
 	private String logradouro;
+	
+	@NotBlank @NotNull(message = "Preenchimento obrigatório")
 	private String numero;
 	private String complemento;
 	private String bairro;
+	
+	@NotBlank @NotNull(message = "Preenchimento obrigatório")
 	private String cep;
 	
+	@NotBlank @NotNull(message = "Preenchimento obrigatório")
 	private String telefone1;
 	private String telefone2;
 	private String telefone3;
