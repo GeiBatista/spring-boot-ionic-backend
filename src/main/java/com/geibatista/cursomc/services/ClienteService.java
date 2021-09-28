@@ -26,7 +26,7 @@ import com.geibatista.cursomc.services.exceptions.ObjectNotFoundException;
 public class ClienteService {
 
 	@Autowired
-	ClienteRepository repo;
+	private ClienteRepository repo;
 	
 	@Autowired
 	private EnderecoRepository enderecoRepository;
