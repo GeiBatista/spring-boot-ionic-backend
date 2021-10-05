@@ -1,12 +1,14 @@
 package com.geibatista.cursomc.config;
 
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.geibatista.cursomc.domain.PagamentoComBoleto;
 import com.geibatista.cursomc.domain.PagamentoComCartao;
 
+@Configuration
 public class JacksonConfig {
 
 	// https://stackoverflow.com/questions/41452598/overcome-can-not-construct-instance-ofinterfaceclass-without-hinting-the-pare
