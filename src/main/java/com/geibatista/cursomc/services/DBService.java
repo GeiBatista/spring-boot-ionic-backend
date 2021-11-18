@@ -87,7 +87,7 @@ public class DBService {
 
 		Cliente cli1 = new Cliente(null, "Barbara Sarno", "geibatista44@gmail.com", "94070369520", TipoCliente.PESSOAFISICA, pe.encode("123"));
 		
-		Cliente cli2 = new Cliente(null, "Gei Batista", "geibatista44@gmail.com", "51417227591", TipoCliente.PESSOAFISICA, pe.encode("345"));
+		Cliente cli2 = new Cliente(null, "Gei Batista", "geibatista442@gmail.com", "51417227591", TipoCliente.PESSOAFISICA, pe.encode("345"));
 
 		Endereco e1 = new Endereco(null, "Rua Humberto Porto", "193", "Apto 104", "São Marcos", "41250575", cli1, c1);
 		Endereco e2 = new Endereco(null, "Rua das Araras", "1057", "Apto 1010", "Imbuí", "42510825", cli1, c2);
