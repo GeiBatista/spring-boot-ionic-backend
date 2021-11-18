@@ -20,6 +20,7 @@ import com.geibatista.cursomc.domain.PagamentoComCartao;
 import com.geibatista.cursomc.domain.Pedido;
 import com.geibatista.cursomc.domain.Produto;
 import com.geibatista.cursomc.domain.enums.EstadoPagamento;
+import com.geibatista.cursomc.domain.enums.Perfil;
 import com.geibatista.cursomc.domain.enums.TipoCliente;
 import com.geibatista.cursomc.repositories.CategoriaRepository;
 import com.geibatista.cursomc.repositories.CidadeRepository;
@@ -84,11 +85,14 @@ public class DBService {
 		Cidade c2 = new Cidade(null, "São Paulo", est2);
 		Cidade c3 = new Cidade(null, "Campinas", est2);
 
-		Cliente cli1 = new Cliente(null, "Barbara Sarno", "geibatista44@gmail.com", "94070369520",
-				TipoCliente.PESSOAFISICA, pe.encode("123"));
+		Cliente cli1 = new Cliente(null, "Barbara Sarno", "geibatista44@gmail.com", "94070369520", TipoCliente.PESSOAFISICA, pe.encode("123"));
+		
+		Cliente cli2 = new Cliente(null, "Gei Batista", "geibatista44@gmail.com", "51417227591", TipoCliente.PESSOAFISICA, pe.encode("345"));
 
 		Endereco e1 = new Endereco(null, "Rua Humberto Porto", "193", "Apto 104", "São Marcos", "41250575", cli1, c1);
 		Endereco e2 = new Endereco(null, "Rua das Araras", "1057", "Apto 1010", "Imbuí", "42510825", cli1, c2);
+		Endereco e3 = new Endereco(null, "Rua Dr. Luiz Humbero Hangler", "108", "Qda A", "Ipitanga", "42599251", cli2, c3);
+
 
 		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy hh:mm");
 
@@ -128,6 +132,10 @@ public class DBService {
 
 		cli1.getTelefones().addAll(Arrays.asList("71981041151", "7130426141"));
 		cli1.getEnderecos().addAll(Arrays.asList(e1, e2));
+		
+		cli2.addPerfil(Perfil.ADMIN);
+		cli2.getTelefones().addAll(Arrays.asList("71981406141", "7131255525"));
+		cli2.getEnderecos().addAll(Arrays.asList(e3));
 
 		ped1.setPagamento(pgto1);
 		ped2.setPagamento(pgto2);
@@ -145,8 +153,8 @@ public class DBService {
 		produtoRepository.saveAll(Arrays.asList(p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11));
 		estadoRepository.saveAll(Arrays.asList(est1, est2));
 		cidadeRepository.saveAll(Arrays.asList(c1, c2, c3));
-		clienteRepository.saveAll(Arrays.asList(cli1));
-		enderecoRepository.saveAll(Arrays.asList(e1, e2));
+		clienteRepository.saveAll(Arrays.asList(cli1, cli2));
+		enderecoRepository.saveAll(Arrays.asList(e1, e2, e3));
 		pedidoRepository.saveAll(Arrays.asList(ped1, ped2));
 		pagamentoRepository.saveAll(Arrays.asList(pgto1, pgto2));
 		itemPedidoRepository.saveAll(Arrays.asList(ip1, ip2, ip3));
