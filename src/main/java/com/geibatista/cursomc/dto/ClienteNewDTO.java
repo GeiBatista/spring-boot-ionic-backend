@@ -7,6 +7,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.geibatista.cursomc.services.validation.ClienteInsert;
 
 @ClienteInsert
@@ -25,6 +26,9 @@ public class ClienteNewDTO implements Serializable {
 	private String cpfOuCnpj;
 	private Integer tipo;
 	
+	@NotBlank @NotNull(message = "Preenchimento obrigatório")
+	private String senha; 	
+
 	@NotBlank @NotNull(message = "Nome não pode ser em branco")
 	@NotNull(message = "Preenchimento obrigatório")
 	private String logradouro;
@@ -73,6 +77,14 @@ public class ClienteNewDTO implements Serializable {
 
 	public Integer getTipo() {
 		return tipo;
+	}
+	
+	public String getSenha() {
+		return senha;
+	}
+
+	public void setSenha(String senha) {
+		this.senha = senha;
 	}
 
 	public void setTipo(Integer tipo) {
