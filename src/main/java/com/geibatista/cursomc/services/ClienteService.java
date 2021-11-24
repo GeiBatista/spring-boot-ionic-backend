@@ -1,10 +1,12 @@
 package com.geibatista.cursomc.services;
 
+import java.awt.image.BufferedImage;
 import java.net.URI;
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -36,6 +38,15 @@ public class ClienteService {
 	
 	@Autowired
 	private S3Service s3Service;
+	
+	@Autowired
+	private ImageService imageService;
+	
+	@Value("${img.prefix.client.profile}")
+	private String prefix;
+	
+//	@Value("${img.profile.size}")
+//	private Integer size;
 	
 	@Autowired
 	private ClienteRepository repo;
@@ -109,38 +120,30 @@ public class ClienteService {
 		newObj.setEmail(obj.getEmail());
 	}
 	
-	public URI uploadProfilePicture(MultipartFile multipartFile) {
-		UserSS user = UserService.authenticated();
-
-		if(user == null) {
-
-		throw new AuthorizationException("Acesso negado!");
-
-		}
-
-		URI uri = s3Service.uploadFile(multipartFile);
-
-		Optional<Cliente> cli = repo.findById(user.getId());
-
-		cli.get().setImageUrl(uri.toString());
-
-		repo.save(cli.get());
-
-		return uri;
-	}
-	
 //	public URI uploadProfilePicture(MultipartFile multipartFile) {
 //		UserSS user = UserService.authenticated();
 //		if (user == null) {
-//			throw new AuthorizationException("Acesso negado");
+//			throw new AuthorizationException("Acesso negado!");
 //		}
-//		
-//		BufferedImage jpgImage = imageService.getJpgImageFromFile(multipartFile);
+//		URI uri = s3Service.uploadFile(multipartFile);
+//		Optional<Cliente> cli = repo.findById(user.getId());
+//		cli.get().setImageUrl(uri.toString());
+//		repo.save(cli.get());
+//		return uri;
+//	}
+	
+	public URI uploadProfilePicture(MultipartFile multipartFile) {
+		UserSS user = UserService.authenticated();
+		if (user == null) {
+			throw new AuthorizationException("Acesso negado");
+		}
+		
+		BufferedImage jpgImage = imageService.getJpgImageFromFile(multipartFile);
+		String fileName = prefix + user.getId() + ".jpg";
+				
 //		jpgImage = imageService.cropSquare(jpgImage);
 //		jpgImage = imageService.resize(jpgImage, size);
-//		
-//		String fileName = prefix + user.getId() + ".jpg";
-//		
-//		return s3Service.uploadFile(imageService.getInputStream(jpgImage, "jpg"), fileName, "image");
-//	}
+				
+		return s3Service.uploadFile(imageService.getInputStream(jpgImage, "jpg"), fileName, "image");
+	}
 }
